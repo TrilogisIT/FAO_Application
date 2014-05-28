@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ElevationModel modelType="Compound" version="1">
+	<ElevationModel version="1">
+		<DisplayName>Earth Elevation Model (USA 10m, WordWide 30m, Ocean 900m)</DisplayName>
+		<Service serviceName="OGC:WMS" version="1.3">
+			<GetCapabilitiesURL>http://data.worldwind.arc.nasa.gov/elev</GetCapabilitiesURL>
+			<GetMapURL>http://data.worldwind.arc.nasa.gov/elev</GetMapURL>
+			<LayerNames>mergedAsterElevations</LayerNames>
+		</Service>
+		<RetrievePropertiesFromService>false</RetrievePropertiesFromService>
+		<NetworkRetrievalEnabled>false</NetworkRetrievalEnabled>
+		<!-- day month year hours:minutes:seconds timezone -->
+		<LastUpdate>17 12 2009 01:01:01 GMT</LastUpdate>
+		<DataCacheName>Earth/EarthElevationModel.bil16</DataCacheName>
+		<ImageFormat>application/bil16</ImageFormat>
+		<DataType byteOrder="LittleEndian" type="Int16"/>
+		<DataDetailHint>0.20</DataDetailHint>
+		<FormatSuffix>.bil</FormatSuffix>
+		<ExtremeElevations max="8850" min="-11000">
+			<FileName>config/SRTM30Plus_ExtremeElevations_5.bil</FileName>
+		</ExtremeElevations>
+		<NumLevels count="10" numEmpty="0"/>
+		<TileOrigin>
+			<LatLon latitude="-90" longitude="-180" units="degrees"/>
+		</TileOrigin>
+		<LevelZeroTileDelta>
+			<LatLon latitude="20" longitude="20" units="degrees"/>
+		</LevelZeroTileDelta>
+		<TileSize>
+			<Dimension height="150" width="150"/>
+		</TileSize>
+		<Sector>
+			<SouthWest>
+				<LatLon latitude="-90" longitude="-180" units="degrees"/>
+			</SouthWest>
+			<NorthEast>
+				<LatLon latitude="90" longitude="180" units="degrees"/>
+			</NorthEast>
+		</Sector>
+		<SectorResolutionLimit maxLevelNum="11">
+			<Sector>
+				<SouthWest>
+					<LatLon latitude="24" longitude="-125" units="degrees"/>
+				</SouthWest>
+				<NorthEast>
+					<LatLon latitude="50" longitude="-66.8" units="degrees"/>
+				</NorthEast>
+			</Sector>
+		</SectorResolutionLimit>
+		<SectorResolutionLimit maxLevelNum="11">
+			<Sector>
+				<SouthWest>
+					<LatLon latitude="18.5" longitude="-160.5" units="degrees"/>
+				</SouthWest>
+				<NorthEast>
+					<LatLon latitude="22.5" longitude="-154.5" units="degrees"/>
+				</NorthEast>
+			</Sector>
+		</SectorResolutionLimit>
+		<SectorResolutionLimit maxLevelNum="11">
+			<Sector>
+				<SouthWest>
+					<LatLon latitude="17.8" longitude="-67.4" units="degrees"/>
+				</SouthWest>
+				<NorthEast>
+					<LatLon latitude="18.7" longitude="-64.5" units="degrees"/>
+				</NorthEast>
+			</Sector>
+		</SectorResolutionLimit>
+		<SectorResolutionLimit maxLevelNum="11">
+			<Sector>
+				<SouthWest>
+					<LatLon latitude="48" longitude="-179.9" units="degrees"/>
+				</SouthWest>
+				<NorthEast>
+					<LatLon latitude="66" longitude="-128" units="degrees"/>
+				</NorthEast>
+			</Sector>
+		</SectorResolutionLimit>
+		<SectorResolutionLimit maxLevelNum="9">
+			<Sector>
+				<SouthWest>
+					<LatLon latitude="-54" longitude="-180" units="degrees"/>
+				</SouthWest>
+				<NorthEast>
+					<LatLon latitude="60" longitude="180" units="degrees"/>
+				</NorthEast>
+			</Sector>
+		</SectorResolutionLimit>
+		<SectorResolutionLimit maxLevelNum="4">
+			<Sector>
+				<SouthWest>
+					<LatLon latitude="-90" longitude="-180" units="degrees"/>
+				</SouthWest>
+				<NorthEast>
+					<LatLon latitude="90" longitude="180" units="degrees"/>
+				</NorthEast>
+			</Sector>
+		</SectorResolutionLimit>
+	</ElevationModel>
+</ElevationModel>

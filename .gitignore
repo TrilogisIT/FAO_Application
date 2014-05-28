@@ -1,4 +1,12 @@
 *.class
+.settings/
+
+
+# Generated files
+bin/
+gen/
+
+
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

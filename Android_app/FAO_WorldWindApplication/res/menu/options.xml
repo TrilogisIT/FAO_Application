@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <item
+        android:id="@+id/action_trilogis"
+        android:showAsAction="ifRoom|withText"
+        android:icon="@drawable/ic_action_trilogis"
+        android:title="@string/trilogis"/>
+    
+    <item
+        android:id="@+id/settings"
+        android:showAsAction="ifRoom|withText"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="@string/settings"/>
+</menu>

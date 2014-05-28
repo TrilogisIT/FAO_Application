@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: worldwind.layers.xml 733 2012-09-02 17:15:09Z dcollins $ -->
+<!-- This document specifies the initial layers to load in World Wind -->
+<!-- This list can be overridden by specifying an alternate list in worldwind.xml, or by specifying an -->
+<!-- alternate configuration document -->
+<!-- See the javadoc for the Configuration class for details -->
+<LayerList>
+    <Layer className="gov.nasa.worldwind.layers.SkyGradientLayer" title="Sky">
+        <Property name="NetworkRetrievalEnabled" value="false"/>
+    </Layer>
+    <Layer className="gov.nasa.worldwind.layers.Earth.BMNGOneImage" >
+        <!-- Individual properties can be specified within Layer entries, like this: -->
+        <Property name="MinActiveAltitude" value="5e4"/>
+        <Property name="NetworkRetrievalEnabled" value="false"/>
+    </Layer>
+    <!-- Layers not needed for fao<Layer actuate="onRequest" href="config/Earth/BMNGWMSLayer.xml"/>
+    <Layer actuate="onRequest" href="config/Earth/LandsatLayer.xml"/>
+    <Layer actuate="onRequest" href="config/Earth/customOverlay.xml"/>-->
+    <!-- <Layer actuate="onRequest" className="gov.nasa.worldwind.layers.WorldMapLayer" title="World Map" /> -->
+    
+    <Layer actuate="onLoad" className="gov.nasa.worldwind.layers.FAOCompassLayer" title="Compass">
+        <Property name="NetworkRetrievalEnabled" value="false"/>
+    </Layer>
+    <Layer actuate="onLoad" className="gov.nasa.worldwind.layers.FAOBackCompassLayer" title="Compass">
+        <Property name="NetworkRetrievalEnabled" value="false"/>
+    </Layer>
+    <Layer actuate="onLoad" className="gov.nasa.worldwind.layers.ScalebarLayer" title="Scale Bar">
+        <Property name="NetworkRetrievalEnabled" value="false"/>
+    </Layer>
+</LayerList>

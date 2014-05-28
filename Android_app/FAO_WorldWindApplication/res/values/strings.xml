@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="app_name">eLocust3 3D</string>
+    <string name="trilogis">TRILOGIS</string>
+    
+    <!-- World wind -->
+	    <string name="latitude">Latitude: </string>
+	    <string name="longitude">Longitude: </string>
+	    <string name="offglobe">off globe</string>
+	    <string name="noposition">No position</string>
+	    <string name="current_position">User position:</string>
+	    <string name="select_position">Touched position:</string>
+    
+	<!-- Alert messages -->
+    	<string name="alert_message_nolayers">There is no map to display, please insert SDCard and restart the application.</string>
+    	<string name="alert_message_nocache">Without cache directory is not possible to use this application.</string>
+    
+    <!-- Clear cache -->
+	    <string name="clear_cache">Delete maps</string>
+	    <string name="clearing_cache_message">Deleting data&#8230;</string>
+    
+    <!-- Unzip -->
+    	<string name="unzip_message">Decompressing data</string>
+    	<string name="unzip_dialog_text">Data is already stored. Do you want replace or add data?</string>
+    	<string name="unzip_dialog_title">Unzip maps</string>
+    	<string name="append">Add</string>
+    	<string name="replace">Replace</string>
+    	<string name="unzip_error">Decompress error: </string>
+    	<string name="unzip_ok">Data decompressed correctly</string>
+    
+    <!-- Delete zip -->
+    	<string name="deleting_zip">Deleting zip file&#8230;</string>
+    	<string name="delete_zip_title">Delete zip file</string>
+    	<string name="delete_zip_text">Do you want to delete zip file?</string>
+    	<string name ="recommended">(Recommended)</string>
+    	<string name="yes">Yes</string>
+    	<string name="no">No</string>
+   
+    <!-- GPS Configuration -->
+	    <string name="turn_on_gps">Turn on GPS to find your location</string>
+	    <string name="reset_gps">GPS doesn\'t detect your location, try to reset it</string>
+	    <string name="settings">Settings</string>
+	    <string name="close">Close</string>
+	    <string name="no_gps_update">No more updates</string>
+	    
+	    
+	<!--  Unused-->
+	    <string name="menu_action_text_show_toc">TOC</string>
+	    <string name="toc_default_checkbox_text">&#8230;</string>
+	    <string name="toc_drag_icon_content_description">Drag Item</string>
+	    <string name="toc_view_delete_content_description">Delete Layer</string>
+	    
+	    
+	    
+	<!-- Layers -->
+	<string name="layers">Layers</string>
+		<string name="boundaries">Political boundaries</string>
+		<string name="overlay">Overlay</string>
+		<string name="background">Background</string>
+		<string name="tpc">TPC</string>
+		<string name="landsat">Landsat</string>
+		<string name="greenness">Greenness</string>
+		<string name="rainfall">Rainfall</string>
+
+	<string name="exaggeration">Elevation exaggeration: </string>
+	<string name="gps">GPS update</string>
+	<string name="gps_seconds">Seconds: </string>
+	<string name="gps_meters">Meters: </string>
+	
+	<string name="zero">0</string>
+	<string name="five">5x</string>
+	
+	
+</resources>

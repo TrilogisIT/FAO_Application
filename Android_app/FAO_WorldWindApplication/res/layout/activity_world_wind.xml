@@ -1,0 +1,121 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:id="@+id/maplayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal" 
+        android:layout_weight="1">
+        
+
+	        <gov.nasa.worldwind.WorldWindowGLSurfaceView
+	            android:id="@+id/wwd"
+	            android:layout_width="match_parent"
+	            android:layout_height="match_parent" />
+        
+	        <!-- <ImageButton
+	            android:id="@+id/gps_button"
+	            android:layout_width="64dp"
+	            android:layout_height="64dp"
+	            android:layout_alignParentRight="true"
+	            android:layout_alignParentTop="true"
+	            android:src="@android:drawable/ic_menu_mylocation" />
+	        
+	        <LinearLayout
+	            android:layout_alignTop="@id/gps_button"
+	            android:layout_alignRight="@id/gps_button"
+	            android:layout_alignLeft="@id/gps_button"
+	            android:layout_alignBottom="@id/gps_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+	            <ProgressBar
+	                android:id="@+id/progress_gps"
+	                style="@android:style/Widget.ProgressBar.Small"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:visibility="gone" 
+	                android:background="@null"/> 
+
+            </LinearLayout>-->
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/latlondisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/transparent_background"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="7dp" >
+	    <TextView 
+	        android:id="@+id/current_pos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/current_position"/>
+	    
+	    <TextView
+            android:id="@+id/poslatlabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/latitude" />
+        <TextView
+            android:id="@+id/poslatvalue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/noposition" />
+        <TextView
+            android:id="@+id/poslonlabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="@string/longitude" />
+        <TextView
+            android:id="@+id/poslonvalue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/noposition" />
+        
+        <View
+    		android:layout_width="3dp"
+    		android:layout_height="match_parent"
+    		android:background="@android:color/holo_blue_light"
+    		android:layout_marginLeft="25dp"
+    		android:layout_marginRight="25dp"/>
+        
+	    
+	    
+	    <TextView 
+	        android:id="@+id/selected_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_position"/>
+	    
+        <TextView
+            android:id="@+id/latlabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/latitude" />
+        <TextView
+            android:id="@+id/latvalue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/offglobe" />
+        <TextView
+            android:id="@+id/lonlabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="@string/longitude" />
+        <TextView
+            android:id="@+id/lonvalue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/offglobe" />
+    </LinearLayout>
+</LinearLayout>

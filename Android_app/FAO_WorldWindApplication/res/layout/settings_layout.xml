@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+  	android:layout_height="fill_parent">
+	    
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:orientation="vertical" 
+	    android:paddingRight="8dp">
+	
+	    <TextView
+	        android:id="@+id/txt_background"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/background"
+	        android:textAppearance="?android:attr/textAppearanceLarge"
+	        android:padding="8dp" />
+	
+	    <Switch
+	        android:id="@+id/swt_tpc"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:paddingLeft="32dp"
+	        android:text="@string/tpc"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <Switch
+	        android:id="@+id/swt_landsat"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:paddingLeft="32dp"
+	        android:paddingBottom="16dp"
+	        android:paddingTop="4dp"
+	        android:text="@string/landsat" 
+	        android:textAppearance="?android:attr/textAppearanceMedium"/>
+	
+	    <TextView
+	        android:id="@+id/txt_overlay"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:padding="8dp"
+	        android:text="@string/overlay"
+	        android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+	    <Switch
+	        android:id="@+id/swt_greenness"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:paddingLeft="32dp"
+	        android:text="@string/greenness"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    <Switch
+	        android:id="@+id/swt_rainfall"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:paddingTop="4dp"
+	        android:paddingLeft="32dp"
+	        android:paddingBottom="16dp"
+	        android:text="@string/rainfall"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	        
+	
+	    <Switch
+	        android:id="@+id/swt_boundaries"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:paddingLeft="8dp"
+	        android:paddingTop="16dp"
+	        android:paddingBottom="16dp"
+	        android:textAppearance="?android:attr/textAppearanceLarge"
+	        android:text="@string/boundaries" />
+	    
+	    <TextView
+	        android:id="@+id/txt_exaggeration"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:padding="8dp"
+	        android:text="@string/exaggeration"
+	        android:textAppearance="?android:attr/textAppearanceLarge" android:visibility="gone" />
+    
+	    <LinearLayout android:layout_width="match_parent"
+	    	android:layout_height="wrap_content"
+	    	android:orientation="horizontal"
+			android:paddingLeft="32dp"
+			android:paddingTop="8dp"
+			android:visibility="gone">
+	        
+	        <TextView
+	        android:id="@+id/txt_zero"
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:paddingRight="8dp"
+	        android:text="@string/zero"
+	        android:textAppearance="?android:attr/textAppearanceLarge" />
+	        
+	        <SeekBar 
+	        android:id="@+id/bar_exaggeration"
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:max="5"
+	        android:minWidth="256dp"/>
+	        
+	        <TextView
+	        android:id="@+id/txt_five"
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:paddingLeft="8dp"
+	        android:text="@string/five"
+	        android:textAppearance="?android:attr/textAppearanceLarge" />
+	        
+	        <TextView
+	        android:id="@+id/txt_actual_exaggeration"
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:paddingLeft="16dp"
+	        android:textAppearance="?android:attr/textAppearanceLarge" />
+	        
+	    </LinearLayout>
+    
+ 
+        
+	    <Switch
+	        android:id="@+id/swt_gps"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:paddingTop="16dp"
+	        android:paddingLeft="8dp"
+	        android:text="@string/gps"
+	        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    
+        
+	
+		<LinearLayout 
+		    	android:layout_width="match_parent"
+		    	android:layout_height="wrap_content"
+		    	android:orientation="horizontal"
+				android:paddingLeft="32dp"
+				android:paddingTop="8dp">
+		    
+		  <TextView
+	        android:id="@+id/txt_gps_seconds"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:paddingRight="8dp"
+	        android:minWidth="150dp"
+	        android:text="@string/gps_seconds"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+	        <SeekBar 
+	        android:id="@+id/bar_gps_seconds"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:max="119"
+	        android:minWidth="256dp"/>
+        
+        
+		    
+		</LinearLayout>
+    
+        
+		<LinearLayout 
+		    	android:layout_width="match_parent"
+		    	android:layout_height="wrap_content"
+		    	android:orientation="horizontal"
+				android:paddingLeft="32dp"
+				android:paddingTop="8dp">
+		
+	        <TextView
+	        android:id="@+id/txt_gps_meters"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:paddingRight="8dp"
+	        android:minWidth="150dp"
+	        android:text="@string/gps_meters"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+	    
+	        <SeekBar 
+	        android:id="@+id/bar_gps_meters"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:max="990"
+	        android:minWidth="256dp"/>
+        
+    
+        </LinearLayout>        
+        
+
+	</LinearLayout>
+
+</ScrollView>

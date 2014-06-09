@@ -9,6 +9,26 @@ The goal of this application is to help FAO at providing support to national loc
 Desert locusts are a huge problem for the population and due to their ability to change their behaviours and habits.
 These locusts are hard to limit as they form swarms and move rapidly (about 20km/h). Moreover, they can consume (in 1km² swarm) as much food as 35.000 people eats in a single day.
 
+
+How to compile/run the code
+-------
+
+Android Application:
+* Download the Android WorldWind SDK at: [GitHub Repo](https://github.com/TrilogisIT/WorldWind_Android/tree/fao-master) and import in eclipse (fix your android sdk dependencies, download needed api versions)
+* Download the Android_app and import in eclipse. Fix library dependency using the SDK imported above.
+* Run the application as standard Android application, but remember to copy your zip data before doing this (the application does not try to download tiles from the web!) [Sample Data](http://goo.gl/lvwYdY)
+
+
+Desktop Application:
+The desktop application can't compile as it is because we did not want to put ALL the WorldWind SDK sources to both avoid code replication and avoid this repo to be hundreds of megabytes. All the needed sources are free and downloadable from NASA website.
+* Download both the WorldWindTileCreator and WorldWind_Project data
+* Download standard WorldWind desktop SDK [WorldWind SDK](http://builds.worldwind.arc.nasa.gov/download-release-1.5.1.asp) . We used WW 1.5.1, 2.0 has not tested and could be lead to a non working app.
+* Put the whole WW SDK into WorldWind_Project, but do not overwrite java sources (or you can put WorldWind_Project sources over the WW sdk sources.
+* Import WorldWindTileCreator and make it dependant to WorldWind_Project created above.
+* Run as a standard Swing application (GUIClass is the main class), import your TIFF and DEM data, set folders, project name and coordinates, and run the Tiling Work!
+* If the app fails to show TIFF when "Browsing" for files, close and reopen the Browsing window, this is due to the GDAL libraries that sometimes are loaded later than the Browsing window.
+
+
 Credits
 -------
 

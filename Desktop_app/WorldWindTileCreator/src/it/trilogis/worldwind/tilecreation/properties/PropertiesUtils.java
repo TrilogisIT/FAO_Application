@@ -16,10 +16,9 @@
 package it.trilogis.worldwind.tilecreation.properties;
 
 import it.trilogis.worldwind.tilecreation.constants.PropertiesConstants;
-
+import it.trilogis.worldwind.tilecreation.swing.utils.ImprovedFormattedTextField;
 import java.io.File;
 import java.util.ArrayList;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JList;
@@ -55,6 +54,10 @@ import javax.swing.JTextField;
 	public static void assignValueFromProperties(String propertyName, JTextField field){
 		field.setText(PropertiesManager.getStringProperty(propertyName));
 	}
+	
+	public static void assignValueFromProperties(String propertyName, ImprovedFormattedTextField field){
+	    field.setValue(PropertiesManager.getDoubleProperty(propertyName));
+	} 
 	
 	
 	public static void assignDirPathFromProperties(String propertyName, JFileChooser fileChooser){

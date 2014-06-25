@@ -4,6 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="lib" path="libs/okhttp-1.2.1-jar-with-dependencies.jar"/>
 	<classpathentry kind="lib" path="libs/gdal.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/WorldWind_ProjectLOCAL"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/WorldWind_Project"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/GMaps_SelectArea"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

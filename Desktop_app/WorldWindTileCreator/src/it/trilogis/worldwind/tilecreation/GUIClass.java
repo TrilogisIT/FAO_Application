@@ -25,8 +25,7 @@ import gov.nasa.worldwind.geom.Sector;
 import gov.nasa.worldwind.util.Logging;
 import it.trilogis.worldwind.geo.Bounds;
 import it.trilogis.worldwind.geo.LatLonPoint;
-import it.trilogis.worldwind.mapareaselector.TestGuiMAP;
-import it.trilogis.worldwind.mapareaselector.TestGuiMAP.OnBoundingBoxSelectedListener;
+import it.trilogis.worldwind.tilecreation.MapAreaSelection.OnBoundingBoxSelectedListener;
 import it.trilogis.worldwind.tilecreation.constants.Constants;
 import it.trilogis.worldwind.tilecreation.constants.GUIConstants;
 import it.trilogis.worldwind.tilecreation.constants.PropertiesConstants;
@@ -77,6 +76,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -114,6 +114,9 @@ public class GUIClass extends JFrame implements ItemListener {
     public static final Boolean IS_DEBUG = true;
     public static final Boolean ENABLE_CHANGE_LEVELS = false;
     private static final String ZIP_FILE_NAME = "wwtiles";
+
+    //
+    private boolean _makeBackgroundLayerOpaque = false;
 
     // AlreadyExisting tiles option
     Object[] mDialogOptions = { "Re-download", "Overwrite", "Cancel" };
@@ -175,7 +178,7 @@ public class GUIClass extends JFrame implements ItemListener {
 
     private JFrame aboutDialog = null, helpDialog = null;
 
-    /** Creates new form GazzettaDownloaderUI */
+    /** Creates new form GUIClass */
     public GUIClass() {
         setMinimumSize(new Dimension(600, 350));
         initGraphics();
@@ -202,6 +205,7 @@ public class GUIClass extends JFrame implements ItemListener {
 
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
+        // File props
         JMenu mnFile = new JMenu("File");
         mnFile.setIcon(new ImageIcon(GUIConstants.IMAGE_URL_FILE_ICON));
         menuBar.add(mnFile);
@@ -268,6 +272,22 @@ public class GUIClass extends JFrame implements ItemListener {
             }
         });
 
+        // Properties
+        JMenu mnProps = new JMenu("Properties");
+        menuBar.add(mnProps);
+        final JCheckBoxMenuItem mnbackgroundOpaque = new JCheckBoxMenuItem("Background Opaque");
+        mnbackgroundOpaque.setSelected(_makeBackgroundLayerOpaque);
+        mnbackgroundOpaque.addItemListener(new ItemListener() {
+
+            @Override
+            public void itemStateChanged(ItemEvent arg0) {
+                _makeBackgroundLayerOpaque = mnbackgroundOpaque.isSelected();
+                // System.out.println("Selected (BackgroundWILL BE OPAQUE): " + _makeBackgroundLayerOpaque);
+            }
+        });
+        mnProps.add(mnbackgroundOpaque);
+
+        // Right icons
         menuBar.add(Box.createHorizontalGlue());
         final JMenu mnAbout = new JMenu("About");
         mnAbout.setIcon(new ImageIcon(GUIConstants.IMAGE_URL_ABOUT_ICON));
@@ -496,10 +516,13 @@ public class GUIClass extends JFrame implements ItemListener {
         Component horizontalStrut1 = Box.createHorizontalStrut(10);
         Component horizontalStrut2 = Box.createHorizontalStrut(10);
         Component horizontalStrut3 = Box.createHorizontalStrut(10);
-        horizontalStrut.setMaximumSize(new Dimension(40, 20));
-        horizontalStrut1.setMaximumSize(new Dimension(10, 20));
-        horizontalStrut2.setMaximumSize(new Dimension(10, 20));
-        horizontalStrut3.setMaximumSize(new Dimension(10, 20));
+        Component horizontalStrut4 = Box.createHorizontalStrut(10);
+        Dimension smallDimension = new Dimension(10, 20);
+        horizontalStrut.setMaximumSize(new Dimension(30, 20));
+        horizontalStrut1.setMaximumSize(smallDimension);
+        horizontalStrut2.setMaximumSize(smallDimension);
+        horizontalStrut3.setMaximumSize(smallDimension);
+        horizontalStrut4.setMaximumSize(smallDimension);
 
         mDisableableComponents.add(minLatitude);
         mDisableableComponents.add(minLongitude);
@@ -549,9 +572,10 @@ public class GUIClass extends JFrame implements ItemListener {
                     existingBounds.setLowerRightPoint(new LatLonPoint((Double) minLatitude.getValue(), (Double) maxLongitude.getValue()));
                 }
 
-                new TestGuiMAP(listnr, existingBounds).setVisible(true);
+                new MapAreaSelection(listnr, existingBounds).setVisible(true);
             }
         });
+        bBoxPanel.add(horizontalStrut4);
         bBoxPanel.add(javaAoiBtn);
 
         return bBoxPanel;
@@ -1406,9 +1430,9 @@ public class GUIClass extends JFrame implements ItemListener {
 
     private DataStoreProducer getProducer(File[] files, Sector bbox, String datasetName, final ProgressMonitor progressMonitor, final AtomicInteger progress) {
         final Thread currentThread = getCurrentThread(datasetName);
-        final boolean makeBackgroundsNonTransparent = true;//FIXME this should be selected in UI
+        // final boolean makeBackgroundsNonTransparent = false;//FIXME this should be selected in UI
         final boolean background = (datasetName == Constants.BACKGROUND_LANDSAT_CACHE_FOLDER || datasetName == Constants.BACKGROUND_TPC_CACHE_FOLDER);
-        final DataStoreProducer producer = ImportUtils.createDataStoreProducerFromFiles(files, bbox, makeBackgroundsNonTransparent && background);
+        final DataStoreProducer producer = ImportUtils.createDataStoreProducerFromFiles(files, bbox, _makeBackgroundLayerOpaque && background);
         PropertyChangeListener progressListener = null;
 
         if (datasetName == Constants.ELEVATION_LAYER_CACHE_FOLDER) {
@@ -1438,7 +1462,7 @@ public class GUIClass extends JFrame implements ItemListener {
                     if (evt.getPropertyName().equals(AVKey.PROGRESS)) {
                         Double tileProgress = (Double) evt.getNewValue();
                         int count = 0;
-                        if (makeBackgroundsNonTransparent &&  background) {
+                        if (_makeBackgroundLayerOpaque && background) {
                             count = ((TiledPKMImageProducer) producer).getTotalTileCount();
                         } else {
                             count = ((TransparentPKMTiledImageProducer) producer).getTotalTileCount();

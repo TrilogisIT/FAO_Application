@@ -1275,27 +1275,27 @@ public class GUIClass extends JFrame implements ItemListener {
                 // Start work
 
                 if (hasGreenness) {
-                    greennessThread = getThread(greennessfiles.toArray(new File[1]), Constants.OVERLAY_GREENNESS_CACHE_FOLDER, bbox);
+                    greennessThread = getThread(greennessfiles.toArray(new File[greennessfiles.size()]), Constants.OVERLAY_GREENNESS_CACHE_FOLDER, bbox);
                     greennessThread.start();
                 }
 
                 if (hasRainfall) {
-                    rainfallThread = getThread(rainfallfiles.toArray(new File[1]), Constants.OVERLAY_RAINFALL_CACHE_FOLDER, bbox);
+                    rainfallThread = getThread(rainfallfiles.toArray(new File[rainfallfiles.size()]), Constants.OVERLAY_RAINFALL_CACHE_FOLDER, bbox);
                     rainfallThread.start();
                 }
 
                 if (hasTPC) {
-                    tpcThread = getThread(tpcfiles.toArray(new File[1]), Constants.BACKGROUND_TPC_CACHE_FOLDER, bbox);
+                    tpcThread = getThread(tpcfiles.toArray(new File[tpcfiles.size()]), Constants.BACKGROUND_TPC_CACHE_FOLDER, bbox);
                     tpcThread.start();
                 }
 
                 if (hasLandsat) {
-                    landsatThread = getThread(landsatfiles.toArray(new File[1]), Constants.BACKGROUND_LANDSAT_CACHE_FOLDER, bbox);
+                    landsatThread = getThread(landsatfiles.toArray(new File[landsatfiles.size()]), Constants.BACKGROUND_LANDSAT_CACHE_FOLDER, bbox);
                     landsatThread.start();
                 }
 
                 if (hasElevation) {
-                    elevationThread = getThread(elevationfiles.toArray(new File[1]), Constants.ELEVATION_LAYER_CACHE_FOLDER, bbox);
+                    elevationThread = getThread(elevationfiles.toArray(new File[elevationfiles.size()]), Constants.ELEVATION_LAYER_CACHE_FOLDER, bbox);
                     elevationThread.start();
                 }
 

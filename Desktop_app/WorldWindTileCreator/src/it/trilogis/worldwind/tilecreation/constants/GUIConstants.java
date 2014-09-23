@@ -32,10 +32,10 @@ public class GUIConstants {
 	public final static Color COLOR_BOUNDARIES = new Color(127,10,10);
 	
 	//GUI Title layer type
-	public final static String LAYER_TYPE_BACKGROUND = "Background";
-	public final static String LAYER_TYPE_OVERLAY = "Overlay";
-	public final static String LAYER_TYPE_ELEVATION = "Elevation";
-	public final static String LAYER_TYPE_BOUNDARIES = "Boundaries";
+	public final static String LAYER_TYPE_BASEMAP = "Base map";
+	public final static String LAYER_TYPE_BASEMAP_DESCRIPTION = "(one time only)";
+	public final static String LAYER_TYPE_LATESTMAP = "Latest map";
+	public final static String LAYER_TYPE_LATESTMAP_DESCRIPTION = "(for new surveys)";
 	
 	
 	//GUI Title layer name

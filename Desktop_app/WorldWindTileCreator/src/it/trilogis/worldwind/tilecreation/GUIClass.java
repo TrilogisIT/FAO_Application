@@ -161,6 +161,13 @@ public class GUIClass extends JFrame implements ItemListener {
     final JFileChooser landsatfileChooser = new JFileChooser();
     final JFileChooser elevationfileChooser = new JFileChooser();
     final JFileChooser boundariesfileChooser = new JFileChooser();
+    
+    List<File> greennessfiles = new ArrayList<File>();
+    List<File> rainfallfiles = new ArrayList<File>();
+    List<File> tpcfiles = new ArrayList<File>();
+    List<File> landsatfiles = new ArrayList<File>();
+    List<File> elevationfiles = new ArrayList<File>();
+    
 
     Thread greennessThread = null;
     Thread rainfallThread = null;
@@ -605,16 +612,14 @@ public class GUIClass extends JFrame implements ItemListener {
         JPanel list = new JPanel();
         list.setAlignmentX(Component.LEFT_ALIGNMENT);
         list.setLayout(new BoxLayout(list, BoxLayout.Y_AXIS));
-        Dimension size = new Dimension(120, 370);
+        Dimension size = new Dimension(130, 370);
         list.setMinimumSize(size);
         list.setMaximumSize(size);
         list.setBackground(GUIConstants.COLOR_NEUTRAL);
         list.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        JPanel panBack = getLeftPanelLayerType(GUIConstants.LAYER_TYPE_BACKGROUND);
-        JPanel panOver = getLeftPanelLayerType(GUIConstants.LAYER_TYPE_OVERLAY);
-        JPanel panElev = getLeftPanelLayerType(GUIConstants.LAYER_TYPE_ELEVATION);
-        JPanel panBound = getLeftPanelLayerType(GUIConstants.LAYER_TYPE_BOUNDARIES);
+        JPanel panBack = getLeftPanelLayerType(GUIConstants.LAYER_TYPE_BASEMAP,GUIConstants.LAYER_TYPE_BASEMAP_DESCRIPTION);
+        JPanel panOver = getLeftPanelLayerType(GUIConstants.LAYER_TYPE_LATESTMAP,GUIConstants.LAYER_TYPE_LATESTMAP_DESCRIPTION);
 
         list.add(panBack);
 
@@ -624,20 +629,23 @@ public class GUIClass extends JFrame implements ItemListener {
         landsatLeftPan = getLeftPanelLayer(GUIConstants.LAYER_NAME_LANDSAT, chbLandSat);
         list.add(landsatLeftPan);
 
+        elevationLeftPan = getLeftPanelLayer(GUIConstants.LAYER_NAME_ELEVATION, chbElev);
+        list.add(elevationLeftPan);
+
+        boundariesLeftPan = getLeftPanelLayer(GUIConstants.LAYER_NAME_BOUNDARIES, chbBound);
+        list.add(boundariesLeftPan);
+        
+        JPanel space = new JPanel();
+        space.setBackground(GUIConstants.COLOR_NEUTRAL);
+        space.setBorder(new EmptyBorder(8, 8, 8, 8));
+        list.add(space);
+        
         list.add(panOver);
         greennessLeftPan = getLeftPanelLayer(GUIConstants.LAYER_NAME_GREENNESS, chbGreenness);
         list.add(greennessLeftPan);
 
         rainfallLeftPan = getLeftPanelLayer(GUIConstants.LAYER_NAME_RAINFALL, chbRainfall);
         list.add(rainfallLeftPan);
-
-        list.add(panElev);
-        elevationLeftPan = getLeftPanelLayer(GUIConstants.LAYER_NAME_ELEVATION, chbElev);
-        list.add(elevationLeftPan);
-
-        list.add(panBound);
-        boundariesLeftPan = getLeftPanelLayer(GUIConstants.LAYER_NAME_BOUNDARIES, chbBound);
-        list.add(boundariesLeftPan);
 
         chbTPC.addItemListener(this);
         chbLandSat.addItemListener(this);
@@ -849,13 +857,16 @@ public class GUIClass extends JFrame implements ItemListener {
      * @param type
      * @return JPanel layer type left panel
      */
-    private JPanel getLeftPanelLayerType(String type) {
+    private JPanel getLeftPanelLayerType(String type, String description) {
         JLabel lblType = new JLabel(type);
-        lblType.setFont(new Font("Tahoma", Font.BOLD, 11));
+        JLabel lblDesc = new JLabel(description);
+        lblType.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblDesc.setFont(new Font("Tahoma", Font.ITALIC, 12));
         JPanel panelType = new JPanel(new BorderLayout(0, 0));
-        panelType.add(lblType, BorderLayout.LINE_START);
+        panelType.add(lblType, BorderLayout.CENTER);
+        panelType.add(lblDesc, BorderLayout.SOUTH);
         panelType.setBackground(GUIConstants.COLOR_NEUTRAL);
-        panelType.setBorder(new EmptyBorder(10, 0, 3, 0));
+        panelType.setBorder(new EmptyBorder(3, 0, 3, 0));
         return panelType;
     }
 
@@ -888,12 +899,12 @@ public class GUIClass extends JFrame implements ItemListener {
         JPanel offlinePanel = new JPanel(new GridBagLayout());
 
         greennessPanel = getLayerPanel(greennessfileChooser, greennessListFiles, GUIConstants.LAYER_NAME_GREENNESS, GUIConstants.COLOR_OVERLAY,
-            PropertiesConstants.PROPERTY_GREENNESS);
-        rainfallPanel = getLayerPanel(rainfallfileChooser, rainfallListFiles, GUIConstants.LAYER_NAME_RAINFALL, GUIConstants.COLOR_OVERLAY, PropertiesConstants.PROPERTY_RAINFALL);
-        tpcPanel = getLayerPanel(tpcfileChooser, tpcListFiles, GUIConstants.LAYER_NAME_TPC, GUIConstants.COLOR_BACKGROUND, PropertiesConstants.PROPERTY_TPC);
-        landsatPanel = getLayerPanel(landsatfileChooser, landsatListFiles, GUIConstants.LAYER_NAME_LANDSAT, GUIConstants.COLOR_BACKGROUND, PropertiesConstants.PROPERTY_LANDSAT);
+            PropertiesConstants.PROPERTY_GREENNESS, greennessfiles);
+        rainfallPanel = getLayerPanel(rainfallfileChooser, rainfallListFiles, GUIConstants.LAYER_NAME_RAINFALL, GUIConstants.COLOR_OVERLAY, PropertiesConstants.PROPERTY_RAINFALL, rainfallfiles);
+        tpcPanel = getLayerPanel(tpcfileChooser, tpcListFiles, GUIConstants.LAYER_NAME_TPC, GUIConstants.COLOR_BACKGROUND, PropertiesConstants.PROPERTY_TPC, tpcfiles);
+        landsatPanel = getLayerPanel(landsatfileChooser, landsatListFiles, GUIConstants.LAYER_NAME_LANDSAT, GUIConstants.COLOR_BACKGROUND, PropertiesConstants.PROPERTY_LANDSAT, landsatfiles);
         elevationPanel = getLayerPanel(elevationfileChooser, elevationListFiles, GUIConstants.LAYER_NAME_ELEVATION, GUIConstants.COLOR_ELEVATION,
-            PropertiesConstants.PROPERTY_ELEVATION);
+            PropertiesConstants.PROPERTY_ELEVATION, elevationfiles);
         boundariesPanel = getBoundariesPanel();
 
         resetRightPanel();
@@ -994,7 +1005,7 @@ public class GUIClass extends JFrame implements ItemListener {
      * 
      * @return JPanel layer panel
      */
-    private JPanel getLayerPanel(final JFileChooser fileChooser, final JList list, String layerName, Color color, final String propertyLayer) {
+    private JPanel getLayerPanel(final JFileChooser fileChooser, final JList list, String layerName, Color color, final String propertyLayer, final List<File> presentFiles) {
         final JPanel custom = new JPanel();
         custom.setBackground(color);
         custom.setLayout(new BoxLayout(custom, BoxLayout.X_AXIS));
@@ -1004,7 +1015,7 @@ public class GUIClass extends JFrame implements ItemListener {
         buttons.setLayout(new BoxLayout(buttons, BoxLayout.Y_AXIS));
         buttons.setBackground(color);
 
-        JButton btnChooseFiles = new JButton("Select File(s)");
+        JButton btnChooseFiles = new JButton("Add File(s)");
         btnChooseFiles.setBackground(color);
         JButton btnClear = new JButton("Clear list");
         btnClear.setBackground(color);
@@ -1049,15 +1060,22 @@ public class GUIClass extends JFrame implements ItemListener {
                 final File[] files = fileChooser.getSelectedFiles();
                 if (files == null || files.length == 0)
                     return;
-                list.setModel(new DefaultListModel());
-
-                String[] filesName = new String[files.length];
+                
                 for (int i = 0; i < files.length; i++) {
-                    filesName[i] = files[i].getName();
-                    ((DefaultListModel) list.getModel()).add(i, filesName[i]);
+                	if(!isPresentInList(presentFiles,files[i])){
+	                    presentFiles.add(files[i]);
+                	}
                 }
 
-                PropertiesManager.setArrayStringProperty(propertyLayer + PropertiesConstants.PROPERTY_FILES, filesName);
+                list.setModel(new DefaultListModel());
+                
+                String[] filesPath = new String[presentFiles.size()];
+                for(int j = 0; j< presentFiles.size();j++){
+                	filesPath[j] = presentFiles.get(j).getAbsolutePath();
+                	((DefaultListModel) list.getModel()).add(j, presentFiles.get(j).getName());
+                }
+
+                PropertiesManager.setArrayStringProperty(propertyLayer + PropertiesConstants.PROPERTY_FILES, filesPath);
                 PropertiesManager.setStringProperty(propertyLayer + PropertiesConstants.PROPERTY_DIRECTORY, fileChooser.getCurrentDirectory().getAbsolutePath());
             }
         });
@@ -1069,10 +1087,23 @@ public class GUIClass extends JFrame implements ItemListener {
                 list.setModel(new DefaultListModel());
                 fileChooser.setSelectedFile(new File(""));
                 fileChooser.setSelectedFiles(new File[] { new File("") });
+                presentFiles.clear();
                 PropertiesManager.setArrayStringProperty(propertyLayer + PropertiesConstants.PROPERTY_FILES, null);
             }
         });
         return custom;
+    }
+    
+    private final boolean isPresentInList(List<File> files, File file){
+    	int i = 0;
+    	boolean find = false;
+    	while((!find)&&(i<files.size())){
+    		if(files.get(i).getAbsolutePath().equals(file.getAbsolutePath())){
+    			find=true;
+    		}
+    		i++;
+    	}
+    	return find;
     }
 
     /**
@@ -1134,22 +1165,22 @@ public class GUIClass extends JFrame implements ItemListener {
         final File directory = new File(baseDirectoryTF.getText(), subDirectoryTF.getText());
 
         boolean hasGreenness = true, hasRainfall = true, hasTPC = true, hasLandsat = true, hasElevation = true, hasBoundaries = true;
-        final File[] greennessfiles = this.greennessfileChooser.getSelectedFiles();
-        final File[] rainfallfiles = this.rainfallfileChooser.getSelectedFiles();
-        final File[] tpcfiles = this.tpcfileChooser.getSelectedFiles();
-        final File[] landsatfiles = this.landsatfileChooser.getSelectedFiles();
-        final File[] elevationfiles = this.elevationfileChooser.getSelectedFiles();
+//        final File[] greennessfiles = this.greennessfileChooser.getSelectedFiles();
+//        final File[] rainfallfiles = this.rainfallfileChooser.getSelectedFiles();
+//        final File[] tpcfiles = this.tpcfileChooser.getSelectedFiles();
+//        final File[] landsatfiles = this.landsatfileChooser.getSelectedFiles();
+//        final File[] elevationfiles = this.elevationfileChooser.getSelectedFiles();
         final File boundariesfile = this.boundariesfileChooser.getSelectedFile();
 
-        if (greennessfiles == null || greennessfiles.length == 0 || !chbGreenness.isSelected())
+        if (greennessfiles == null || greennessfiles.size() == 0 || !chbGreenness.isSelected())
             hasGreenness = false;
-        if (rainfallfiles == null || rainfallfiles.length == 0 || !chbRainfall.isSelected())
+        if (rainfallfiles == null || rainfallfiles.size() == 0 || !chbRainfall.isSelected())
             hasRainfall = false;
-        if (tpcfiles == null || tpcfiles.length == 0 || !chbTPC.isSelected())
+        if (tpcfiles == null || tpcfiles.size() == 0 || !chbTPC.isSelected())
             hasTPC = false;
-        if (landsatfiles == null || landsatfiles.length == 0 || !chbLandSat.isSelected())
+        if (landsatfiles == null || landsatfiles.size() == 0 || !chbLandSat.isSelected())
             hasLandsat = false;
-        if (elevationfiles == null || elevationfiles.length == 0 || !chbElev.isSelected())
+        if (elevationfiles == null || elevationfiles.size() == 0 || !chbElev.isSelected())
             hasElevation = false;
         if (boundariesfile == null || !chbBound.isSelected())
             hasBoundaries = false;
@@ -1244,27 +1275,27 @@ public class GUIClass extends JFrame implements ItemListener {
                 // Start work
 
                 if (hasGreenness) {
-                    greennessThread = getThread(greennessfiles, Constants.OVERLAY_GREENNESS_CACHE_FOLDER, bbox);
+                    greennessThread = getThread(greennessfiles.toArray(new File[1]), Constants.OVERLAY_GREENNESS_CACHE_FOLDER, bbox);
                     greennessThread.start();
                 }
 
                 if (hasRainfall) {
-                    rainfallThread = getThread(rainfallfiles, Constants.OVERLAY_RAINFALL_CACHE_FOLDER, bbox);
+                    rainfallThread = getThread(rainfallfiles.toArray(new File[1]), Constants.OVERLAY_RAINFALL_CACHE_FOLDER, bbox);
                     rainfallThread.start();
                 }
 
                 if (hasTPC) {
-                    tpcThread = getThread(tpcfiles, Constants.BACKGROUND_TPC_CACHE_FOLDER, bbox);
+                    tpcThread = getThread(tpcfiles.toArray(new File[1]), Constants.BACKGROUND_TPC_CACHE_FOLDER, bbox);
                     tpcThread.start();
                 }
 
                 if (hasLandsat) {
-                    landsatThread = getThread(landsatfiles, Constants.BACKGROUND_LANDSAT_CACHE_FOLDER, bbox);
+                    landsatThread = getThread(landsatfiles.toArray(new File[1]), Constants.BACKGROUND_LANDSAT_CACHE_FOLDER, bbox);
                     landsatThread.start();
                 }
 
                 if (hasElevation) {
-                    elevationThread = getThread(elevationfiles, Constants.ELEVATION_LAYER_CACHE_FOLDER, bbox);
+                    elevationThread = getThread(elevationfiles.toArray(new File[1]), Constants.ELEVATION_LAYER_CACHE_FOLDER, bbox);
                     elevationThread.start();
                 }
 
@@ -1702,12 +1733,12 @@ public class GUIClass extends JFrame implements ItemListener {
         PropertiesUtils.assignDirPathFromProperties(PropertiesConstants.PROPERTY_ELEVATION_DIRECTORY, elevationfileChooser);
         PropertiesUtils.assignDirPathFromProperties(PropertiesConstants.PROPERTY_BOUNDARIES_DIRECTORY, boundariesfileChooser);
 
-        PropertiesUtils.assignListFilesFromProperties(PropertiesConstants.PROPERTY_GREENNESS_FILES, greennessfileChooser, greennessListFiles);
-        PropertiesUtils.assignListFilesFromProperties(PropertiesConstants.PROPERTY_RAINFALL_FILES, rainfallfileChooser, rainfallListFiles);
-        PropertiesUtils.assignListFilesFromProperties(PropertiesConstants.PROPERTY_TPC_FILES, tpcfileChooser, tpcListFiles);
-        PropertiesUtils.assignListFilesFromProperties(PropertiesConstants.PROPERTY_LANDSAT_FILES, landsatfileChooser, landsatListFiles);
-        PropertiesUtils.assignListFilesFromProperties(PropertiesConstants.PROPERTY_ELEVATION_FILES, elevationfileChooser, elevationListFiles);
-        PropertiesUtils.assignListFilesFromProperties(PropertiesConstants.PROPERTY_BOUNDARIES_FILES, boundariesfileChooser, boundariesListFiles);
+        PropertiesUtils.assignListFilesFromProperties(PropertiesConstants.PROPERTY_GREENNESS_FILES, greennessfileChooser, greennessListFiles, greennessfiles);
+        PropertiesUtils.assignListFilesFromProperties(PropertiesConstants.PROPERTY_RAINFALL_FILES, rainfallfileChooser, rainfallListFiles, rainfallfiles);
+        PropertiesUtils.assignListFilesFromProperties(PropertiesConstants.PROPERTY_TPC_FILES, tpcfileChooser, tpcListFiles, tpcfiles);
+        PropertiesUtils.assignListFilesFromProperties(PropertiesConstants.PROPERTY_LANDSAT_FILES, landsatfileChooser, landsatListFiles, landsatfiles);
+        PropertiesUtils.assignListFilesFromProperties(PropertiesConstants.PROPERTY_ELEVATION_FILES, elevationfileChooser, elevationListFiles, elevationfiles);
+        PropertiesUtils.assignListFilesBoundariesFromProperties(PropertiesConstants.PROPERTY_BOUNDARIES_FILES, boundariesfileChooser, boundariesListFiles);
     }
 
     private void refreshProperties() {

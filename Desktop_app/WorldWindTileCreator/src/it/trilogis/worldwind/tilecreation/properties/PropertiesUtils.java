@@ -17,8 +17,11 @@ package it.trilogis.worldwind.tilecreation.properties;
 
 import it.trilogis.worldwind.tilecreation.constants.PropertiesConstants;
 import it.trilogis.worldwind.tilecreation.swing.utils.ImprovedFormattedTextField;
+
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JList;
@@ -30,7 +33,24 @@ import javax.swing.JTextField;
  */
  public class PropertiesUtils {
 
-	public static void assignListFilesFromProperties(String propertyName, JFileChooser fileChooser, JList list){
+	public static void assignListFilesFromProperties(String propertyName, JFileChooser fileChooser, JList list, List<File> files){
+		String[] filesPath = PropertiesManager.getArrayStringProperty(propertyName);
+		
+	    if(!(null==filesPath || filesPath.length==0)){
+	    	list.setModel(new DefaultListModel());
+	    	for(int i=0;i<filesPath.length;i++){
+	    		File file = new File(filesPath[i]);
+	    		if(file.exists()){
+                    ((DefaultListModel)list.getModel()).add(i,file.getName());
+                    files.add(file);
+	    		}
+	    	}
+	    	File[] temp = new File[files.size()];
+			fileChooser.setSelectedFiles(files.toArray(temp));
+	   	}
+	}
+	
+	public static void assignListFilesBoundariesFromProperties(String propertyName, JFileChooser fileChooser, JList list){
 		String[] files = PropertiesManager.getArrayStringProperty(propertyName);
 		
 	    if(!(null==files || files.length==0)){

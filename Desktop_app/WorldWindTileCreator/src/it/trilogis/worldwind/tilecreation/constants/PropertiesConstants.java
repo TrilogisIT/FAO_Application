@@ -32,7 +32,6 @@ public class PropertiesConstants {
 	public static final String PROPERTY_LANDSAT_DIRECTORY = "landsatDirectory";
 	public static final String PROPERTY_ELEVATION_DIRECTORY = "elevationDirectory";
 	public static final String PROPERTY_BOUNDARIES_DIRECTORY = "boundariesDirectory";
-	
 	public static final String PROPERTY_GREENNESS_FILES = "greennessFiles";
 	public static final String PROPERTY_RAINFALL_FILES = "rainfallFiles";
 	public static final String PROPERTY_TPC_FILES = "tpcFiles";
